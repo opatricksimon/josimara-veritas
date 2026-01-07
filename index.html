@@ -1,1 +1,3383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Veritas - Quebra de Ciclos Financeiros. Programa de 3 semanas com Josimara Mattos para identificar e romper padrões financeiros repetitivos.">
+    <meta name="author" content="Josimara Mattos">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Veritas | Quebra de Ciclos Financeiros - Josimara Mattos">
+    <meta property="og:description" content="Programa de 3 semanas para mulheres que percebem recorrência de travas financeiras. Identifique e rompa seus padrões.">
+    <meta property="og:image" content="https://i.postimg.cc/ZKDvhqcQ/1767623013057-019b8e89-9fe1-7d27-8a1d-48c694df17ff.png">
+    <meta property="og:type" content="website">
+    
+    <title>Veritas | Quebra de Ciclos Financeiros - Josimara Mattos</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================
+           VARIÁVEIS CSS - REGULADORES
+           Ajuste esses valores para personalizar
+        ======================================== */
+        :root {
+            /* === REGULADORES DO HERO === */
+            --hero-content-top: 55%;          /* Posição vertical do conteúdo (50% = centro, maior = mais baixo) */
+            --hero-overlay-opacity: 0.75;      /* Opacidade do overlay escuro (0 a 1) */
+            --hero-title-size: clamp(2.2rem, 6vw, 4rem);
+            
+            /* === CORES PRINCIPAIS === */
+            --preto: #0a0a0a;
+            --preto-light: #1a1a1a;
+            --preto-lighter: #2a2a2a;
+            --dourado: #d4a853;
+            --dourado-light: #e8c87a;
+            --dourado-dark: #b8923f;
+            --dourado-glow: rgba(212, 168, 83, 0.4);
+            --branco: #ffffff;
+            --branco-off: #f5f5f5;
+            --cinza-claro: #e0e0e0;
+            --cinza: #888888;
+            --cinza-escuro: #444444;
+            
+            /* === TIPOGRAFIA === */
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            /* === LAYOUT === */
+            --container-max: 1200px;
+            --header-height: 80px;
+            
+            /* === TRANSIÇÕES === */
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            --transition-slower: 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            
+            /* === SOMBRAS === */
+            --shadow-gold: 0 4px 30px rgba(212, 168, 83, 0.3);
+            --shadow-gold-intense: 0 8px 40px rgba(212, 168, 83, 0.5);
+            --shadow-dark: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ========================================
+           RESET & BASE
+        ======================================== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--branco);
+            background-color: var(--preto);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-fast);
+        }
+
+        ul, ol {
+            list-style: none;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        /* ========================================
+           UTILITÁRIOS
+        ======================================== */
+        .container {
+            width: 100%;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 80px 0;
+            }
+        }
+
+        /* Texto dourado com brilho metálico animado */
+        .gold-text {
+            background: linear-gradient(
+                135deg,
+                var(--dourado) 0%,
+                var(--dourado-light) 25%,
+                var(--dourado) 50%,
+                var(--dourado-light) 75%,
+                var(--dourado) 100%
+            );
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmerText 4s ease-in-out infinite;
+        }
+
+        @keyframes shimmerText {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* ========================================
+           BARRA DE PROGRESSO
+        ======================================== */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--dourado-dark), var(--dourado), var(--dourado-light));
+            z-index: 9999;
+            transition: width 0.1s ease;
+            box-shadow: 0 0 10px var(--dourado-glow);
+        }
+
+        /* ========================================
+           BOTÕES - LUXO COM ANIMAÇÃO
+        ======================================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 32px;
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border-radius: 50px;
+            transition: all var(--transition-normal);
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .btn svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        /* Botão Dourado Principal */
+        .btn-gold {
+            background: linear-gradient(135deg, var(--dourado-dark) 0%, var(--dourado) 50%, var(--dourado-light) 100%);
+            color: var(--preto);
+            box-shadow: var(--shadow-gold);
+            border: 1px solid var(--dourado);
+        }
+
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                transparent
+            );
+            transform: translateX(-100%) skewX(-15deg);
+            transition: transform 0.6s ease;
+            z-index: 0;
+        }
+
+        .btn-gold:hover::before {
+            transform: translateX(100%) skewX(-15deg);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-gold-intense);
+        }
+
+        /* Animação de pulse sutil */
+        .btn-animated {
+            animation: btnPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes btnPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: var(--shadow-gold);
+            }
+            50% {
+                transform: scale(1.02);
+                box-shadow: var(--shadow-gold-intense), 0 0 30px var(--dourado-glow);
+            }
+        }
+
+        .btn-animated:hover {
+            animation: none;
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        /* Botão Outline */
+        .btn-outline {
+            background: transparent;
+            color: var(--dourado);
+            border: 2px solid var(--dourado);
+        }
+
+        .btn-outline:hover {
+            background: var(--dourado);
+            color: var(--preto);
+        }
+
+        /* Botão branco */
+        .btn-white {
+            background: var(--branco);
+            color: var(--preto);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .btn-white:hover {
+            background: var(--branco-off);
+            transform: translateY(-3px);
+        }
+
+        .btn-lg {
+            padding: 18px 40px;
+            font-size: 1.05rem;
+        }
+
+        .btn > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========================================
+           HEADER
+        ======================================== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition-normal);
+        }
+
+        .header.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(212, 168, 83, 0.1);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-text {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--branco);
+        }
+
+        .logo-text span {
+            color: var(--dourado);
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        @media (max-width: 900px) {
+            .header-nav {
+                display: none;
+            }
+        }
+
+        .nav-link {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            transition: var(--transition-fast);
+        }
+
+        .nav-link:hover {
+            color: var(--dourado);
+        }
+
+        .header-cta {
+            padding: 10px 24px;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 600px) {
+            .header-cta {
+                display: none;
+            }
+        }
+
+        /* Menu Mobile */
+        .menu-toggle {
+            display: none;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 22px;
+            height: 2px;
+            background: var(--branco);
+            border-radius: 2px;
+            transition: var(--transition-normal);
+        }
+
+        @media (max-width: 900px) {
+            .menu-toggle {
+                display: flex;
+            }
+        }
+
+        /* ========================================
+           HERO
+        ======================================== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to top,
+                rgba(10, 10, 10, 0.98) 0%,
+                rgba(10, 10, 10, var(--hero-overlay-opacity)) 30%,
+                rgba(10, 10, 10, 0.4) 60%,
+                rgba(10, 10, 10, 0.2) 100%
+            );
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: absolute;
+            top: var(--hero-content-top);
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            text-align: center;
+            width: 100%;
+            max-width: 900px;
+            padding: 0 24px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(212, 168, 83, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 168, 83, 0.3);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--dourado);
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeInDown 1s ease 0.2s forwards;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: var(--hero-title-size);
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--branco);
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.4s forwards;
+        }
+
+        /* Controle de quebra de linha no título */
+        .hero-title .no-break {
+            white-space: nowrap;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-sans);
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            margin-bottom: 40px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        .hero-cta {
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.8s forwards;
+        }
+
+        .hero-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            opacity: 0;
+            animation: fadeInUp 1s ease 1s forwards;
+        }
+
+        .hero-note svg {
+            width: 16px;
+            height: 16px;
+            color: var(--dourado);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            animation: bounce 2s infinite;
+            opacity: 0;
+            animation: bounce 2s infinite, fadeIn 1s ease 1.2s forwards;
+        }
+
+        .hero-scroll svg {
+            width: 28px;
+            height: 28px;
+            color: var(--dourado);
+            opacity: 0.7;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-12px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-6px);
+            }
+        }
+
+        /* ========================================
+           SEÇÃO NÚMEROS / CREDIBILIDADE
+        ======================================== */
+        .numeros {
+            padding: 80px 0;
+            background: linear-gradient(180deg, var(--preto) 0%, var(--preto-light) 100%);
+            border-top: 1px solid rgba(212, 168, 83, 0.1);
+            border-bottom: 1px solid rgba(212, 168, 83, 0.1);
+        }
+
+        .numeros-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 600px) {
+            .numeros-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        .numero-item {
+            text-align: center;
+        }
+
+        .numero-valor {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--dourado) 0%, var(--dourado-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .numero-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ========================================
+           SEÇÃO VÍDEO MANIFESTO
+        ======================================== */
+        .manifesto {
+            background: var(--preto-light);
+        }
+
+        .manifesto-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: rgba(212, 168, 83, 0.1);
+            color: var(--dourado);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border: 1px solid rgba(212, 168, 83, 0.2);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 600;
+            color: var(--branco);
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .manifesto-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .manifesto-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        .video-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            background: var(--preto);
+        }
+
+        .video-wrapper.portrait {
+            padding-top: 177.78%;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 65px;
+            background: var(--preto-light);
+            z-index: 10;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .manifesto-text {
+            padding: 20px 0;
+        }
+
+        .manifesto-text h3 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--branco);
+            margin-bottom: 20px;
+        }
+
+        .manifesto-text p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .manifesto-text p strong {
+            color: var(--dourado);
+        }
+
+        .manifesto-cta {
+            margin-top: 30px;
+        }
+
+        /* ========================================
+           SEÇÃO DORES
+        ======================================== */
+        .dores {
+            background: var(--preto);
+        }
+
+        .dores-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .dores-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto 50px;
+        }
+
+        @media (max-width: 700px) {
+            .dores-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .dor-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 24px;
+            border-radius: 16px;
+            transition: var(--transition-normal);
+        }
+
+        .dor-item:hover {
+            background: rgba(212, 168, 83, 0.05);
+            border-color: rgba(212, 168, 83, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .dor-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(212, 168, 83, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--dourado);
+            font-size: 1.2rem;
+        }
+
+        .dor-item p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .dores-transicao {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(212, 168, 83, 0.1) 0%, rgba(212, 168, 83, 0.02) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(212, 168, 83, 0.2);
+        }
+
+        .dores-transicao p {
+            font-family: var(--font-display);
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-style: italic;
+            color: var(--branco);
+            line-height: 1.7;
+        }
+
+        .dores-transicao .gold-text {
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        /* ========================================
+           SEÇÃO A VERDADE
+        ======================================== */
+        .verdade {
+            background: linear-gradient(135deg, var(--preto-light) 0%, var(--preto) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .verdade::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(212, 168, 83, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .verdade-content {
+            position: relative;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .verdade-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 30px;
+            color: var(--branco);
+        }
+
+        .verdade-text {
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .verdade-text strong {
+            color: var(--branco);
+        }
+
+        .verdade-cta {
+            margin-top: 50px;
+        }
+
+        /* ========================================
+           SEÇÃO O PROGRAMA
+        ======================================== */
+        .programa {
+            background: var(--preto);
+        }
+
+        .programa-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .programa-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        @media (max-width: 900px) {
+            .programa-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        .programa-info {
+            padding: 20px 0;
+        }
+
+        .programa-info h3 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--branco);
+            margin-bottom: 20px;
+        }
+
+        .programa-info p {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .programa-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 30px 0;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(212, 168, 83, 0.1);
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--dourado);
+            border: 1px solid rgba(212, 168, 83, 0.2);
+        }
+
+        .detail-item svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .programa-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 800px) {
+            .programa-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .programa-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 32px 28px;
+            text-align: center;
+            transition: var(--transition-normal);
+        }
+
+        .programa-card:hover {
+            background: rgba(212, 168, 83, 0.05);
+            border-color: rgba(212, 168, 83, 0.2);
+            transform: translateY(-8px);
+        }
+
+        .programa-card-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--dourado-dark) 0%, var(--dourado) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+        }
+
+        .programa-card h4 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--branco);
+            margin-bottom: 12px;
+        }
+
+        .programa-card p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+
+        .programa-cta {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        /* ========================================
+           SEÇÃO SOBRE
+        ======================================== */
+        .sobre {
+            background: var(--preto-light);
+        }
+
+        .sobre-grid {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .sobre-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+        }
+
+        .sobre-image {
+            position: relative;
+        }
+
+        .sobre-image-wrapper {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+        }
+
+        .sobre-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--dourado);
+            border-radius: 24px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .sobre-image img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+        }
+
+        .sobre-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: linear-gradient(135deg, var(--dourado-dark) 0%, var(--dourado) 100%);
+            color: var(--preto);
+            padding: 20px 28px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: var(--shadow-gold);
+        }
+
+        @media (max-width: 600px) {
+            .sobre-badge {
+                right: 10px;
+                bottom: -15px;
+                padding: 16px 20px;
+            }
+        }
+
+        .sobre-badge span {
+            display: block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.8;
+            margin-bottom: 4px;
+        }
+
+        .sobre-badge strong {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .sobre-content {
+            padding: 20px 0;
+        }
+
+        .sobre-content h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 600;
+            color: var(--branco);
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .sobre-content p {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .sobre-content p strong {
+            color: var(--dourado);
+        }
+
+        .sobre-highlight {
+            background: rgba(212, 168, 83, 0.1);
+            border-left: 4px solid var(--dourado);
+            padding: 24px 28px;
+            margin: 30px 0;
+            border-radius: 0 16px 16px 0;
+        }
+
+        .sobre-highlight p {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--dourado);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .sobre-social {
+            margin-top: 30px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(212, 168, 83, 0.1);
+            color: var(--dourado);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border: 1px solid rgba(212, 168, 83, 0.2);
+            transition: var(--transition-normal);
+        }
+
+        .social-link:hover {
+            background: var(--dourado);
+            color: var(--preto);
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Matéria UOL */
+        .uol-mention {
+            margin-top: 40px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+        }
+
+        .uol-mention-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .uol-logo {
+            background: #ff6600;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .uol-mention-header span {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .uol-mention p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+            font-style: italic;
+            margin: 0;
+        }
+
+        /* ========================================
+           SEÇÃO PARA QUEM É
+        ======================================== */
+        .para-quem {
+            background: var(--preto);
+        }
+
+        .para-quem-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .para-quem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto 60px;
+        }
+
+        @media (max-width: 768px) {
+            .para-quem-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .para-quem-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 24px;
+            padding: 40px 35px;
+            border: 2px solid transparent;
+            transition: var(--transition-normal);
+        }
+
+        .para-quem-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .para-quem-sim {
+            border-color: rgba(100, 200, 100, 0.3);
+        }
+
+        .para-quem-sim:hover {
+            box-shadow: 0 15px 40px rgba(100, 200, 100, 0.1);
+        }
+
+        .para-quem-nao {
+            border-color: rgba(200, 100, 100, 0.3);
+        }
+
+        .para-quem-nao:hover {
+            box-shadow: 0 15px 40px rgba(200, 100, 100, 0.1);
+        }
+
+        .para-quem-card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .para-quem-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .para-quem-icon.sim {
+            background: rgba(100, 200, 100, 0.15);
+            color: #64c864;
+        }
+
+        .para-quem-icon.nao {
+            background: rgba(200, 100, 100, 0.15);
+            color: #c86464;
+        }
+
+        .para-quem-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--branco);
+        }
+
+        .para-quem-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .para-quem-lista li {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .check-icon, .x-icon {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 2px;
+        }
+
+        .check-icon {
+            background: rgba(100, 200, 100, 0.15);
+            color: #64c864;
+        }
+
+        .x-icon {
+            background: rgba(200, 100, 100, 0.15);
+            color: #c86464;
+        }
+
+        .para-quem-lista p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .para-quem-cta {
+            text-align: center;
+        }
+
+        .para-quem-cta-text {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            color: var(--branco);
+            margin-bottom: 25px;
+        }
+
+        /* ========================================
+           SEÇÃO DEPOIMENTOS
+        ======================================== */
+        .depoimentos {
+            background: var(--preto-light);
+            overflow: hidden;
+        }
+
+        .depoimentos-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .depoimentos-carousel {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .depoimentos-track {
+            display: flex;
+            gap: 24px;
+            animation: scrollDepoimentos 30s linear infinite;
+            width: max-content;
+        }
+
+        .depoimentos-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollDepoimentos {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .depoimento-card {
+            flex-shrink: 0;
+            width: 320px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition-normal);
+        }
+
+        .depoimento-card:hover {
+            border-color: rgba(212, 168, 83, 0.3);
+            transform: scale(1.02);
+        }
+
+        .depoimento-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .depoimento-placeholder {
+            padding: 28px;
+        }
+
+        .depoimento-placeholder .aspas {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            color: var(--dourado);
+            opacity: 0.3;
+            line-height: 1;
+            margin-bottom: -20px;
+        }
+
+        .depoimento-placeholder p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .depoimento-placeholder .autor {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .depoimento-placeholder .autor-avatar {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--dourado-dark), var(--dourado));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--preto);
+        }
+
+        .depoimento-placeholder .autor-info h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--branco);
+        }
+
+        .depoimento-placeholder .autor-info span {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .depoimentos-cta {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        /* ========================================
+           SEÇÃO INVESTIMENTO
+        ======================================== */
+        .investimento {
+            background: var(--preto);
+            position: relative;
+        }
+
+        .investimento::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at top center, rgba(212, 168, 83, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .investimento-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .investimento-card {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(212, 168, 83, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 2px solid rgba(212, 168, 83, 0.3);
+            border-radius: 32px;
+            padding: 50px 40px;
+            text-align: center;
+        }
+
+        .investimento-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--dourado-dark) 0%, var(--dourado) 100%);
+            color: var(--preto);
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .investimento-titulo {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--branco);
+            margin-bottom: 8px;
+            margin-top: 20px;
+        }
+
+        .investimento-subtitulo {
+            font-size: 1rem;
+            color: var(--dourado);
+            margin-bottom: 30px;
+        }
+
+        .investimento-preco {
+            margin-bottom: 30px;
+        }
+
+        .investimento-preco .de {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: line-through;
+            margin-bottom: 8px;
+        }
+
+        .investimento-preco .por {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 4px;
+        }
+
+        .investimento-preco .valor {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--dourado);
+            line-height: 1;
+        }
+
+        .investimento-preco .valor small {
+            font-size: 1.5rem;
+            vertical-align: super;
+        }
+
+        .investimento-preco .parcelas {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 8px;
+        }
+
+        .investimento-features {
+            text-align: left;
+            margin: 30px 0;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+        }
+
+        .investimento-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .investimento-features li:last-child {
+            border-bottom: none;
+        }
+
+        .investimento-features li svg {
+            width: 20px;
+            height: 20px;
+            color: var(--dourado);
+            flex-shrink: 0;
+        }
+
+        .investimento-cta {
+            margin-top: 20px;
+        }
+
+        .investimento-garantia {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .investimento-garantia svg {
+            width: 18px;
+            height: 18px;
+            color: #64c864;
+        }
+
+        /* ========================================
+           FAQ
+        ======================================== */
+        .faq {
+            background: var(--preto-light);
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: var(--transition-normal);
+        }
+
+        .faq-item:hover {
+            border-color: rgba(212, 168, 83, 0.2);
+        }
+
+        .faq-item.active {
+            border-color: var(--dourado);
+            box-shadow: 0 0 30px rgba(212, 168, 83, 0.1);
+        }
+
+        .faq-question {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            padding: 24px;
+            font-family: var(--font-sans);
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--branco);
+            text-align: left;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .faq-question:hover {
+            color: var(--dourado);
+        }
+
+        .faq-question span {
+            flex: 1;
+        }
+
+        .faq-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(212, 168, 83, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: var(--transition-normal);
+        }
+
+        .faq-icon svg {
+            width: 18px;
+            height: 18px;
+            color: var(--dourado);
+            transition: var(--transition-normal);
+        }
+
+        .faq-item.active .faq-icon {
+            background: var(--dourado);
+        }
+
+        .faq-item.active .faq-icon svg {
+            color: var(--preto);
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 400px;
+        }
+
+        .faq-answer p {
+            padding: 0 24px 24px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+
+        /* ========================================
+           CTA FINAL
+        ======================================== */
+        .cta-final {
+            background: linear-gradient(135deg, var(--preto) 0%, var(--preto-light) 50%, var(--preto) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-final::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(212, 168, 83, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .cta-final-content {
+            position: relative;
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .cta-final-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 600;
+            color: var(--branco);
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .cta-final-text {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .cta-final-btn {
+            margin-bottom: 24px;
+        }
+
+        .cta-final-note {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .cta-final-note svg {
+            width: 20px;
+            height: 20px;
+            color: var(--dourado);
+        }
+
+        /* ========================================
+           FOOTER
+        ======================================== */
+        .footer {
+            background: #050505;
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(212, 168, 83, 0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
+            text-align: center;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--branco);
+        }
+
+        .footer-logo span {
+            color: var(--dourado);
+        }
+
+        .footer-tagline {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            max-width: 400px;
+            margin-top: 12px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-social-link {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--branco);
+            transition: var(--transition-normal);
+        }
+
+        .footer-social-link:hover {
+            background: var(--dourado);
+            border-color: var(--dourado);
+            color: var(--preto);
+            transform: translateY(-3px);
+        }
+
+        .footer-social-link svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-copy {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .footer-credit {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .footer-credit a {
+            color: var(--dourado);
+        }
+
+        /* ========================================
+           WHATSAPP FLUTUANTE
+        ======================================== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 64px;
+            height: 64px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--branco);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: var(--transition-normal);
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.8);
+        }
+
+        .whatsapp-float.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 35px rgba(37, 211, 102, 0.5);
+        }
+
+        .whatsapp-float svg {
+            width: 34px;
+            height: 34px;
+        }
+
+        .whatsapp-tooltip {
+            position: absolute;
+            right: calc(100% + 12px);
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--preto);
+            color: var(--branco);
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-fast);
+            border: 1px solid rgba(212, 168, 83, 0.2);
+        }
+
+        .whatsapp-tooltip::after {
+            content: '';
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 6px solid transparent;
+            border-left-color: var(--preto);
+        }
+
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ========================================
+           BOTÃO VOLTAR AO TOPO
+        ======================================== */
+        .back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 28px;
+            width: 50px;
+            height: 50px;
+            background: var(--preto-light);
+            border: 1px solid rgba(212, 168, 83, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--transition-normal);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--dourado);
+            border-color: var(--dourado);
+        }
+
+        .back-to-top:hover svg {
+            color: var(--preto);
+        }
+
+        .back-to-top svg {
+            width: 22px;
+            height: 22px;
+            color: var(--dourado);
+            transition: var(--transition-fast);
+        }
+
+        /* ========================================
+           POPUP / MODAL
+        ======================================== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-normal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            background: var(--preto-light);
+            border: 1px solid rgba(212, 168, 83, 0.3);
+            border-radius: 24px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(30px) scale(0.95);
+            transition: var(--transition-normal);
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            color: var(--branco);
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-header {
+            padding: 40px 30px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-header h3 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--branco);
+            margin-bottom: 8px;
+        }
+
+        .modal-header p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .modal-body {
+            padding: 20px 30px 30px;
+        }
+
+        .modal-features {
+            margin-bottom: 30px;
+        }
+
+        .modal-feature {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .modal-feature-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(212, 168, 83, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+        }
+
+        .modal-feature-text h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--branco);
+            margin-bottom: 4px;
+        }
+
+        .modal-feature-text p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .modal-preco {
+            text-align: center;
+            padding: 24px;
+            background: rgba(212, 168, 83, 0.1);
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+
+        .modal-preco .valor {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--dourado);
+        }
+
+        .modal-preco .valor small {
+            font-size: 1.2rem;
+        }
+
+        .modal-preco p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 8px;
+        }
+
+        .modal-cta .btn {
+            width: 100%;
+        }
+
+        .modal-note {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ========================================
+           ANIMAÇÕES DE REVEAL
+        ======================================== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all var(--transition-slower);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-delay-1 { transition-delay: 0.1s; }
+        .fade-in-delay-2 { transition-delay: 0.2s; }
+        .fade-in-delay-3 { transition-delay: 0.3s; }
+        .fade-in-delay-4 { transition-delay: 0.4s; }
+
+        /* ========================================
+           RESPONSIVO MOBILE
+        ======================================== */
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .btn {
+                padding: 14px 28px;
+                font-size: 0.9rem;
+            }
+
+            .hero-content {
+                --hero-content-top: 60%;
+            }
+
+            .whatsapp-float {
+                width: 56px;
+                height: 56px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .whatsapp-tooltip {
+                display: none;
+            }
+
+            .back-to-top {
+                width: 44px;
+                height: 44px;
+                bottom: 88px;
+                right: 22px;
+            }
+
+            .modal-box {
+                margin: 10px;
+            }
+
+            .modal-header {
+                padding: 30px 20px 16px;
+            }
+
+            .modal-body {
+                padding: 16px 20px 24px;
+            }
+        }
+
+        /* Prefers reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Barra de Progresso -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Header -->
+<header class="header" id="header">
+    <div class="container header-inner">
+        <a href="#" class="header-logo">
+            <span class="logo-text">Josimara <span>Mattos</span></span>
+        </a>
+        
+        <nav class="header-nav">
+            <a href="#programa" class="nav-link">O Programa</a>
+            <a href="#sobre" class="nav-link">Sobre</a>
+            <a href="#depoimentos" class="nav-link">Depoimentos</a>
+            <a href="#investimento" class="nav-link">Investimento</a>
+            <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+        
+        <a href="#" class="btn btn-gold header-cta" onclick="openModal(); return false;">
+            Quero Participar
+        </a>
+        
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</header>
+
+<!-- ========================================
+     HERO
+======================================== -->
+<section class="hero" id="inicio">
+    <div class="hero-bg">
+        <img src="https://i.postimg.cc/ZKDvhqcQ/1767623013057-019b8e89-9fe1-7d27-8a1d-48c694df17ff.png" alt="Josimara Mattos">
+    </div>
+    <div class="hero-overlay"></div>
+    
+    <div class="hero-content">
+        <span class="hero-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+            </svg>
+            Método Veritas
+        </span>
+        
+        <h1 class="hero-title">
+            <span class="no-break">Você não está</span> <span class="gold-text">quebrada.</span><br>
+            <span class="no-break">Você está em um</span> <span class="gold-text">ciclo.</span>
+        </h1>
+        
+        <p class="hero-subtitle">
+            E ciclos financeiros repetitivos não se quebram com força de vontade.<br>
+            Se quebram com consciência e método.
+        </p>
+        
+        <div class="hero-cta">
+            <a href="#" class="btn btn-gold btn-lg btn-animated" onclick="openModal(); return false;">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                </svg>
+                Quero Quebrar Meus Ciclos
+            </a>
+        </div>
+        
+        <p class="hero-note">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            Próxima turma com vagas limitadas
+        </p>
+    </div>
+    
+    <div class="hero-scroll">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+        </svg>
+    </div>
+</section>
+
+<!-- ========================================
+     NÚMEROS / CREDIBILIDADE
+======================================== -->
+<section class="numeros">
+    <div class="container">
+        <div class="numeros-grid">
+            <div class="numero-item fade-in">
+                <div class="numero-valor">
+                    <span class="contador" data-target="500">0</span>+
+                </div>
+                <p class="numero-label">Mulheres Impactadas</p>
+            </div>
+            
+            <div class="numero-item fade-in fade-in-delay-1">
+                <div class="numero-valor">
+                    <span class="contador" data-target="10">0</span>+
+                </div>
+                <p class="numero-label">Anos de Experiência</p>
+            </div>
+            
+            <div class="numero-item fade-in fade-in-delay-2">
+                <div class="numero-valor">
+                    <span class="contador" data-target="3">0</span>
+                </div>
+                <p class="numero-label">Semanas de Transformação</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================
+     VÍDEO MANIFESTO
+======================================== -->
+<section class="manifesto section" id="manifesto">
+    <div class="container">
+        <div class="manifesto-header fade-in">
+            <span class="section-tag">O Movimento</span>
+            <h2 class="section-title">Bem-vinda ao <span class="gold-text">Movimento Veritas</span></h2>
+            <p class="section-subtitle">A verdade liberta. E a sua liberdade financeira começa aqui.</p>
+        </div>
+        
+        <div class="manifesto-content">
+            <div class="video-wrapper portrait fade-in">
+                <iframe 
+                    src="https://player.vimeo.com/video/1151595410?badge=0&autopause=0&player_id=0&app_id=58479" 
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    title="Manifesto Veritas"
+                    loading="lazy">
+                </iframe>
+            </div>
+            
+            <div class="manifesto-text fade-in fade-in-delay-1">
+                <h3>Por que <span class="gold-text">Veritas</span>?</h3>
+                <p>
+                    Veritas significa <strong>verdade</strong> em latim. E a verdade é que você não está onde quer estar financeiramente não por falta de esforço.
+                </p>
+                <p>
+                    Você repete padrões. Padrões que aprendeu, que absorveu, que carrega sem perceber. E esses padrões sabotam seus resultados toda vez que você tenta avançar.
+                </p>
+                <p>
+                    <strong>O Movimento Veritas nasceu para quem cansou de sobreviver e decidiu prosperar com verdade.</strong>
+                </p>
+                
+                <div class="manifesto-cta">
+                    <a href="#" class="btn btn-gold btn-animated" onclick="openModal(); return false;">
+                        Fazer Parte do Movimento
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================
+     SEÇÃO DORES
+======================================== -->
+<section class="dores section" id="dores">
+    <div class="container">
+        <div class="dores-header fade-in">
+            <span class="section-tag">Você se identifica?</span>
+            <h2 class="section-title">Sinais de que você está <span class="gold-text">presa em um ciclo</span></h2>
+        </div>
+        
+        <div class="dores-grid">
+            <div class="dor-item fade-in">
+                <span class="dor-icon">💸</span>
+                <p>O dinheiro entra, mas nunca sobra — e você não sabe pra onde vai.</p>
+            </div>
+            
+            <div class="dor-item fade-in fade-in-delay-1">
+                <span class="dor-icon">🔄</span>
+                <p>Você ganha mais, mas as dívidas crescem junto.</p>
+            </div>
+            
+            <div class="dor-item fade-in fade-in-delay-1">
+                <span class="dor-icon">🧠</span>
+                <p>Sente que não merece ter dinheiro ou que ele é "sujo".</p>
+            </div>
+            
+            <div class="dor-item fade-in fade-in-delay-2">
+                <span class="dor-icon">😰</span>
+                <p>Tem medo de olhar a conta bancária.</p>
+            </div>
+            
+            <div class="dor-item fade-in fade-in-delay-2">
+                <span class="dor-icon">🎭</span>
+                <p>Gasta para aliviar emoções — e depois se arrepende.</p>
+            </div>
+            
+            <div class="dor-item fade-in fade-in-delay-3">
+                <span class="dor-icon">🚫</span>
+                <p>Sempre que tenta guardar, acontece algo que leva tudo.</p>
+            </div>
+        </div>
+        
+        <div class="dores-transicao fade-in">
+            <p>
+                Se você se viu em pelo menos <strong>duas</strong> dessas frases...<br>
+                Você não precisa de mais força de vontade.<br>
+                <span class="gold-text">Você precisa quebrar o ciclo.</span>
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================
+     SEÇÃO A VERDADE
+======================================== -->
+<section class="verdade section">
+    <div class="container">
+        <div class="verdade-content fade-in">
+            <span class="section-tag">A Verdade</span>
+            <h2 class="verdade-title">
+                Não é falta de disciplina.<br>
+                Não é falta de conhecimento.<br>
+                <span class="gold-text">É padrão inconsciente.</span>
+            </h2>
+            
+            <p class="verdade-text">
+                Você pode ler todos os livros de finanças, fazer todos os cursos, criar todas as planilhas...
+            </p>
+            <p class="verdade-text">
+                <strong>Mas se o padrão que roda no seu inconsciente é de escassez, autossabotagem ou não-merecimento, nada vai mudar de verdade.</strong>
+            </p>
+            <p class="verdade-text">
+                O Veritas usa neurociência e psicologia para você finalmente entender — e romper — o que te trava.
+            </p>
+            
+            <div class="verdade-cta">
+                <a href="#" class="btn btn-gold btn-animated" onclick="openModal(); return false;">
+                    Quero Romper Meus Padrões
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================
+     SEÇÃO O PROGRAMA
+======================================== -->
+<section class="programa section" id="programa">
+    <div class="container">
+        <div class="programa-header fade-in">
+            <span class="section-tag">O Programa</span>
+            <h2 class="section-title">Conheça o <span class="gold-text">Veritas</span></h2>
+            <p class="section-subtitle">Quebra de Ciclos Financeiros em 3 semanas</p>
+        </div>
+        
+        <div class="programa-content">
+            <div class="video-wrapper portrait fade-in">
+                <iframe 
+                    src="https://player.vimeo.com/video/1151595488?badge=0&autopause=0&player_id=0&app_id=58479" 
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    title="Sobre o Veritas"
+                    loading="lazy">
+                </iframe>
+            </div>
+            
+            <div class="programa-info fade-in fade-in-delay-1">
+                <h3>Como funciona</h3>
+                <p>
+                    O Veritas é um programa ao vivo, em grupo, onde você vai identificar os padrões financeiros que te sabotam e aprender a rompê-los de forma definitiva.
+                </p>
+                <p>
+                    Não é curso gravado. É encontro ao vivo, com troca, com profundidade, com transformação real.
+                </p>
+                
+                <div class="programa-details">
+                    <div class="detail-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        3 semanas
+                    </div>
+                    <div class="detail-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+                        </svg>
+                        100% Online
+                    </div>
+                    <div class="detail-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/>
+                        </svg>
+                        Em grupo
+                    </div>
+                    <div class="detail-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        2h por encontro
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="programa-cards">
+            <div class="programa-card fade-in">
+                <div class="programa-card-icon">🔍</div>
+                <h4>Semana 1</h4>
+                <p>Identificação dos padrões financeiros que você repete inconscientemente</p>
+            </div>
+            
+            <div class="programa-card fade-in fade-in-delay-1">
+                <div class="programa-card-icon">🧠</div>
+                <h4>Semana 2</h4>
+                <p>Compreensão da origem desses padrões e reprogramação mental</p>
+            </div>
+            
+            <div class="programa-card fade-in fade-in-delay-2">
+                <div class="programa-card-icon">🚀</div>
+                <h4>Semana 3</h4>
+                <p>Novas práticas e mentalidade para construir uma nova relação com dinheiro</p>
+            </div>
+        </div>
+        
+        <div class="programa-cta fade-in">
+            <a href="#" class="btn btn-gold btn-lg btn-animated" onclick="openModal(); return false;">
+                Garantir Minha Vaga
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================
+     SEÇÃO SOBRE
+======================================== -->
+<section class="sobre section" id="sobre">
+    <div class="container">
+        <div class="sobre-grid">
+            <div class="sobre-image fade-in">
+                <div class="sobre-image-wrapper">
+                    <img src="https://i.postimg.cc/L6PgRDgB/1767622412475-019b8e80-fc7d-768c-84f0-a30c8752ed59.png" alt="Josimara Mattos">
+                </div>
+                <div class="sobre-badge">
+                    <span>Criadora do</span>
+                    <strong>Método Veritas</strong>
+                </div>
+            </div>
+            
+            <div class="sobre-content fade-in fade-in-delay-1">
+                <span class="section-tag">Quem vai te guiar</span>
+                <h2>Prazer, sou a <span class="gold-text">Josimara Mattos</span></h2>
+                
+                <p>
+                    Psicóloga, especialista em neuromarketing e <strong>mentora de profissionais da saúde</strong> que cansaram de sobreviver e decidiram prosperar com verdade.
+                </p>
+                
+                <p>
+                    Com mais de 10 anos de experiência, já impactei mais de 500 mulheres na jornada de transformação financeira e profissional.
+                </p>
+                
+                <div class="sobre-highlight">
+                    <p>
+                        "A formação acadêmica ensina a parte técnica, mas não nos mostra como nos posicionar, atrair e construir uma carreira estável. Isso gera insegurança e até desvalorização profissional."
+                    </p>
+                </div>
+                
+                <p>
+                    Sou casada há 17 anos, mãe, e entendo na prática o que é equilibrar vida pessoal, propósito e prosperidade.
+                </p>
+                
+                <div class="sobre-social">
+                    <a href="https://instagram.com/josimaramattospsi" target="_blank" class="social-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                        @josimaramattospsi
+                    </a>
+                </div>
+                
+                <div class="uol-mention">
+                    <div class="uol-mention-header">
+                        <span class="uol-logo">UOL</span>
+                        <span>Destaque na mídia</span>
+                    </div>
+                    <p>
+                        "A psicóloga e especialista em neuromarketing Josimara Mattos explica que muitos profissionais da saúde não foram preparados para essa nova realidade..."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================
+     SEÇÃO PARA QUEM É
+======================================== -->
+<section class="para-quem section" id="para-quem">
+    <div class="container">
+        <div class="para-quem-header fade-in">
+            <span class="section-tag">Clareza</span>
+            <h2 class="section-title">O Veritas é <span class="gold-text">pra você?</span></h2>
+        </div>
+        
+        <div class="para-quem-grid">
+            <div class="para-quem-card para-quem-sim fade-in">
+                <div class="para-quem-card-header">
+                    <span class="para-quem-icon sim">✓</span>
+                    <h3>É pra você se...</h3>
+                </div>
+                <ul class="para-quem-lista">
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <p>Você percebe que repete padrões financeiros negativos.</p>
+                    </li>
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <p>Quer entender de onde vem sua relação com dinheiro.</p>
+                    </li>
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <p>Está pronta para fazer diferente, não só saber diferente.</p>
+                    </li>
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <p>Busca transformação real, não fórmula mágica.</p>
+                    </li>
+                    <li>
+                        <span class="check-icon">✓</span>
+                        <p>Quer prosperar com consciência e verdade.</p>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="para-quem-card para-quem-nao fade-in fade-in-delay-1">
+                <div class="para-quem-card-header">
+                    <span class="para-quem-icon nao">✕</span>
+                    <h3>Não é pra você se...</h3>
+                </div>
+                <ul class="para-quem-lista">
+                    <li>
+                        <span class="x-icon">✕</span>
+                        <p>Busca resultado sem esforço ou participação.</p>
+                    </li>
+                    <li>
+                        <span class="x-icon">✕</span>
+                        <p>Não está disposta a olhar para si mesma.</p>
+                    </li>
+                    <li>
+                        <span class="x-icon">✕</span>
+                        <p>Quer curso de educação financeira tradicional.</p>
+                    </li>
+                    <li>
+                        <span class="x-icon">✕</span>
+                        <p>Prefere culpar circunstâncias externas.</p>
+                    </li>
+                    <li>
+                        <span class="x-icon">✕</span>
+                        <p>Não vai participar dos encontros ao vivo.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="para-quem-cta fade-in">
+            <p class="para-quem-cta-text">
+                Se você se viu no lado esquerdo, sua vaga está esperando.
+            </p>
+            <a href="#" class="btn btn-gold btn-animated" onclick="openModal(); return false;">
+                Quero Fazer Parte
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================
+     SEÇÃO DEPOIMENTOS
+======================================== -->
+<section class="depoimentos section" id="depoimentos">
+    <div class="container">
+        <div class="depoimentos-header fade-in">
+            <span class="section-tag">Transformações Reais</span>
+            <h2 class="section-title">O que elas <span class="gold-text">dizem</span></h2>
+        </div>
+    </div>
+    
+    <div class="depoimentos-carousel">
+        <div class="depoimentos-track">
+            <!-- Depoimento Real (Print) -->
+            <div class="depoimento-card">
+                <img src="https://i.postimg.cc/B6R3Sdjg/Captura-de-tela-2026-01-05-114848.png" alt="Depoimento de aluna" loading="lazy">
+            </div>
+            
+            <!-- Placeholders -->
+            <div class="depoimento-card">
+                <div class="depoimento-placeholder">
+                    <span class="aspas">"</span>
+                    <p>Eu não entendia por que o dinheiro nunca ficava. Depois do Veritas, percebi que eu mesma sabotava minha prosperidade. Hoje minha relação com dinheiro é outra.</p>
+                    <div class="autor">
+                        <div class="autor-avatar">M</div>
+                        <div class="autor-info">
+                            <h4>Marina S.</h4>
+                            <span>Empresária</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="depoimento-card">
+                <div class="depoimento-placeholder">
+                    <span class="aspas">"</span>
+                    <p>Achava que precisava ganhar mais. Na verdade, precisava mudar minha mentalidade. O programa foi um divisor de águas na minha vida.</p>
+                    <div class="autor">
+                        <div class="autor-avatar">C</div>
+                        <div class="autor-info">
+                            <h4>Carolina R.</h4>
+                            <span>Psicóloga</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="depoimento-card">
+                <div class="depoimento-placeholder">
+                    <span class="aspas">"</span>
+                    <p>Finalmente entendi de onde vinha meu medo de ter dinheiro. A Josi conduz com tanta maestria que o processo é profundo mas acolhedor.</p>
+                    <div class="autor">
+                        <div class="autor-avatar">A</div>
+                        <div class="autor-info">
+                            <h4>Amanda L.</h4>
+                            <span>Nutricionista</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="depoimento-card">
+                <div class="depoimento-placeholder">
+                    <span class="aspas">"</span>
+                    <p>Três semanas que mudaram anos de padrões repetitivos. Recomendo para toda mulher que sente que algo a trava financeiramente.</p>
+                    <div class="autor">
+                        <div class="autor-avatar">F</div>
+                        <div class="autor-info">
+                            <h4>Fernanda M.</h4>
+                            <span>Dentista</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Duplicados para loop -->
+            <div class="depoimento-card">
+                <img src="https://i.postimg.cc/B6R3Sdjg/Captura-de-tela-2026-01-05-114848.png" alt="Depoimento de aluna" loading="lazy">
+            </div>
+            
+            <div class="depoimento-card">
+                <div class="depoimento-placeholder">
+                    <span class="aspas">"</span>
+                    <p>Eu não entendia por que o dinheiro nunca ficava. Depois do Veritas, percebi que eu mesma sabotava minha prosperidade. Hoje minha relação com dinheiro é outra.</p>
+                    <div class="autor">
+                        <div class="autor-avatar">M</div>
+                        <div class="autor-info">
+                            <h4>Marina S.</h4>
+                            <span>Empresária</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="depoimento-card">
+                <div class="depoimento-placeholder">
+                    <span class="aspas">"</span>
+                    <p>Achava que precisava ganhar mais. Na verdade, precisava mudar minha mentalidade. O programa foi um divisor de águas na minha vida.</p>
+                    <div class="autor">
+                        <div class="autor-avatar">C</div>
+                        <div class="autor-info">
+                            <h4>Carolina R.</h4>
+                            <span>Psicóloga</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="depoimento-card">
+                <div class="depoimento-placeholder">
+                    <span class="aspas">"</span>
+                    <p>Finalmente entendi de onde vinha meu medo de ter dinheiro. A Josi conduz com tanta maestria que o processo é profundo mas acolhedor.</p>
+                    <div class="autor">
+                        <div class="autor-avatar">A</div>
+                        <div class="autor-info">
+                            <h4>Amanda L.</h4>
+                            <span>Nutricionista</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="depoimento-card">
+                <div class="depoimento-placeholder">
+                    <span class="aspas">"</span>
+                    <p>Três semanas que mudaram anos de padrões repetitivos. Recomendo para toda mulher que sente que algo a trava financeiramente.</p>
+                    <div class="autor">
+                        <div class="autor-avatar">F</div>
+                        <div class="autor-info">
+                            <h4>Fernanda M.</h4>
+                            <span>Dentista</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="depoimentos-cta fade-in">
+            <a href="#" class="btn btn-gold btn-animated" onclick="openModal(); return false;">
+                Quero Ser a Próxima
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================
+     SEÇÃO INVESTIMENTO
+======================================== -->
+<section class="investimento section" id="investimento">
+    <div class="container">
+        <div class="investimento-header fade-in">
+            <span class="section-tag">Investimento</span>
+            <h2 class="section-title">Quanto custa quebrar seus <span class="gold-text">ciclos?</span></h2>
+        </div>
+        
+        <div class="investimento-card fade-in">
+            <div class="investimento-badge">Próxima Turma</div>
+            
+            <h3 class="investimento-titulo">Veritas</h3>
+            <p class="investimento-subtitulo">Quebra de Ciclos Financeiros</p>
+            
+            <div class="investimento-preco">
+                <p class="por">Investimento:</p>
+                <p class="valor"><small>R$</small> 297</p>
+                <p class="parcelas">ou em até 12x no cartão</p>
+            </div>
+            
+            <ul class="investimento-features">
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    3 encontros ao vivo de 2 horas cada
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Material de apoio exclusivo
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Grupo de suporte no WhatsApp
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Acesso às gravações por 6 meses
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Certificado de participação
+                </li>
+            </ul>
+            
+            <div class="investimento-cta">
+                <a href="#" class="btn btn-gold btn-lg btn-animated" onclick="openModal(); return false;">
+                    Garantir Minha Vaga Agora
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                </a>
+            </div>
+            
+            <p class="investimento-garantia">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+                Compra segura • Turmas mensais
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================
+     FAQ
+======================================== -->
+<section class="faq section" id="faq">
+    <div class="container">
+        <div class="faq-header fade-in">
+            <span class="section-tag">Dúvidas</span>
+            <h2 class="section-title">Perguntas <span class="gold-text">Frequentes</span></h2>
+        </div>
+        
+        <div class="faq-grid">
+            <div class="faq-item fade-in">
+                <button class="faq-question">
+                    <span>Como funcionam os encontros?</span>
+                    <div class="faq-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                </button>
+                <div class="faq-answer">
+                    <p>São 3 encontros ao vivo, um por semana, com duração de 2 horas cada. Os encontros acontecem via Zoom e são gravados para você assistir depois se precisar.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item fade-in">
+                <button class="faq-question">
+                    <span>E se eu não puder participar ao vivo?</span>
+                    <div class="faq-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                </button>
+                <div class="faq-answer">
+                    <p>Você terá acesso às gravações por 6 meses. Mas recomendamos fortemente a participação ao vivo — a troca em grupo potencializa muito a transformação.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item fade-in">
+                <button class="faq-question">
+                    <span>Isso é um curso de educação financeira?</span>
+                    <div class="faq-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                </button>
+                <div class="faq-answer">
+                    <p>Não. O Veritas trabalha a raiz dos seus padrões financeiros — a parte emocional e inconsciente. Não é sobre planilhas, é sobre reprogramar sua relação com dinheiro.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item fade-in">
+                <button class="faq-question">
+                    <span>Quanto tempo leva para ver resultados?</span>
+                    <div class="faq-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                </button>
+                <div class="faq-answer">
+                    <p>Muitas alunas relatam mudanças de percepção já na primeira semana. Resultados práticos dependem da sua aplicação, mas o processo de 3 semanas é desenhado para gerar transformação real.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item fade-in">
+                <button class="faq-question">
+                    <span>Como faço para me inscrever?</span>
+                    <div class="faq-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                </button>
+                <div class="faq-answer">
+                    <p>Clique em qualquer botão "Quero Participar" aqui na página. Você será direcionada para o WhatsApp da Josi para garantir sua vaga na próxima turma.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================
+     CTA FINAL
+======================================== -->
+<section class="cta-final section">
+    <div class="container">
+        <div class="cta-final-content fade-in">
+            <span class="section-tag">Sua Hora é Agora</span>
+            <h2 class="cta-final-title">
+                Pronta para quebrar o ciclo e <span class="gold-text">prosperar de verdade?</span>
+            </h2>
+            <p class="cta-final-text">
+                Você já tentou de tudo. Já se esforçou. Já se culpou.<br>
+                Agora é hora de fazer diferente. É hora da verdade.
+            </p>
+            <div class="cta-final-btn">
+                <a href="#" class="btn btn-gold btn-lg btn-animated" onclick="openModal(); return false;">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    Quero Entrar na Próxima Turma
+                </a>
+            </div>
+            <p class="cta-final-note">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+                Vagas limitadas • Resposta rápida no WhatsApp
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ========================================
+     FOOTER
+======================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-brand-info">
+                <p class="footer-logo">Josimara <span>Mattos</span></p>
+                <p class="footer-tagline">
+                    Psicóloga e Mentora | Criadora do Método Veritas<br>
+                    Ajudando mulheres a prosperar com verdade.
+                </p>
+            </div>
+            
+            <div class="footer-social">
+                <a href="https://instagram.com/josimaramattospsi" target="_blank" class="footer-social-link" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+                <a href="https://wa.me/5547984101465?text=Olá, Josi! Quero participar da próxima turma do Veritas — Quebra de Ciclos Financeiros!" target="_blank" class="footer-social-link" aria-label="WhatsApp">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="footer-copy">© 2025 Josimara Mattos. Todos os direitos reservados.</p>
+            <p class="footer-credit">Desenvolvido por <a href="https://instagram.com/opatricksimon" target="_blank">@opatricksimon</a></p>
+        </div>
+    </div>
+</footer>
+
+<!-- ========================================
+     WHATSAPP FLUTUANTE
+======================================== -->
+<a href="https://wa.me/5547984101465?text=Olá, Josi! Quero participar da próxima turma do Veritas — Quebra de Ciclos Financeiros!" target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="Fale pelo WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span class="whatsapp-tooltip">Fale com a Josi</span>
+</a>
+
+<!-- ========================================
+     BOTÃO VOLTAR AO TOPO
+======================================== -->
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+    </svg>
+</button>
+
+<!-- ========================================
+     MODAL / POPUP
+======================================== -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal()" aria-label="Fechar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        </button>
+        
+        <div class="modal-header">
+            <h3>Veritas</h3>
+            <p>Quebra de Ciclos Financeiros</p>
+        </div>
+        
+        <div class="modal-body">
+            <div class="modal-features">
+                <div class="modal-feature">
+                    <div class="modal-feature-icon">📅</div>
+                    <div class="modal-feature-text">
+                        <h4>3 Semanas de Programa</h4>
+                        <p>Encontros semanais ao vivo de 2h</p>
+                    </div>
+                </div>
+                <div class="modal-feature">
+                    <div class="modal-feature-icon">👥</div>
+                    <div class="modal-feature-text">
+                        <h4>Em Grupo</h4>
+                        <p>Troca e suporte coletivo</p>
+                    </div>
+                </div>
+                <div class="modal-feature">
+                    <div class="modal-feature-icon">🎥</div>
+                    <div class="modal-feature-text">
+                        <h4>Gravações Disponíveis</h4>
+                        <p>Acesso por 6 meses</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-preco">
+                <p class="valor"><small>R$</small> 297</p>
+                <p>ou em até 12x no cartão</p>
+            </div>
+            
+            <div class="modal-cta">
+                <a href="https://wa.me/5547984101465?text=Olá, Josi! Quero participar da próxima turma do Veritas — Quebra de Ciclos Financeiros!" target="_blank" class="btn btn-gold btn-lg btn-animated">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="20" height="20">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    Garantir Minha Vaga
+                </a>
+            </div>
+            
+            <p class="modal-note">Você será direcionada para o WhatsApp da Josi</p>
+        </div>
+    </div>
+</div>
+
+<!-- ========================================
+     JAVASCRIPT
+======================================== -->
+<script>
+    // ========================================
+    // BARRA DE PROGRESSO
+    // ========================================
+    const progressBar = document.getElementById('progressBar');
+    
+    function updateProgressBar() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        progressBar.style.width = scrollPercent + '%';
+    }
+
+    // ========================================
+    // HEADER SCROLL
+    // ========================================
+    const header = document.getElementById('header');
+    
+    function updateHeader() {
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }
+
+    // ========================================
+    // WHATSAPP FLUTUANTE
+    // ========================================
+    const whatsappFloat = document.getElementById('whatsappFloat');
+    
+    function updateWhatsAppFloat() {
+        if (window.scrollY > 400) {
+            whatsappFloat.classList.add('visible');
+        } else {
+            whatsappFloat.classList.remove('visible');
+        }
+    }
+
+    // ========================================
+    // BOTÃO VOLTAR AO TOPO
+    // ========================================
+    const backToTop = document.getElementById('backToTop');
+    
+    function updateBackToTop() {
+        if (window.scrollY > 600) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    }
+    
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // ========================================
+    // REVEAL ON SCROLL (FADE IN)
+    // ========================================
+    const fadeElements = document.querySelectorAll('.fade-in');
+
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -80px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    fadeElements.forEach(el => observer.observe(el));
+
+    // ========================================
+    // CONTADOR ANIMADO
+    // ========================================
+    const contadores = document.querySelectorAll('.contador');
+    
+    const contadorObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const contador = entry.target;
+                const target = parseInt(contador.dataset.target);
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const updateContador = () => {
+                    current += step;
+                    if (current < target) {
+                        contador.textContent = Math.floor(current);
+                        requestAnimationFrame(updateContador);
+                    } else {
+                        contador.textContent = target;
+                    }
+                };
+                
+                updateContador();
+                contadorObserver.unobserve(contador);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    contadores.forEach(contador => contadorObserver.observe(contador));
+
+    // ========================================
+    // FAQ ACCORDION
+    // ========================================
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        
+        question.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            
+            // Fecha todos
+            faqItems.forEach(i => i.classList.remove('active'));
+            
+            // Abre o clicado (se não estava aberto)
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+
+    // ========================================
+    // MODAL
+    // ========================================
+    const modalOverlay = document.getElementById('modalOverlay');
+    
+    function openModal() {
+        modalOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal() {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    // Fechar ao clicar fora
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+            closeModal();
+        }
+    });
+    
+    // Fechar com ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    // ========================================
+    // SMOOTH SCROLL
+    // ========================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            
+            e.preventDefault();
+            const target = document.querySelector(href);
+            
+            if (target) {
+                const headerHeight = header.offsetHeight;
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // ========================================
+    // THROTTLE FUNCTION (PERFORMANCE)
+    // ========================================
+    function throttle(func, limit) {
+        let inThrottle;
+        return function() {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        }
+    }
+
+    // ========================================
+    // EVENT LISTENERS
+    // ========================================
+    const throttledScroll = throttle(function() {
+        updateProgressBar();
+        updateHeader();
+        updateWhatsAppFloat();
+        updateBackToTop();
+    }, 10);
+
+    window.addEventListener('scroll', throttledScroll);
+    
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', function() {
+        updateProgressBar();
+        updateHeader();
+        updateWhatsAppFloat();
+        updateBackToTop();
+    });
+</script>
+
+</body>
+</html>
 
